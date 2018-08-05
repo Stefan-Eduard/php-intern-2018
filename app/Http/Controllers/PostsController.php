@@ -11,11 +11,13 @@ class PostsController extends Controller
 {
     public function index()
     {   // it's a controller action
-        return view('posts.index');
+        $posts = Post::latest()->get(); // latest is a query
+
+        return view('posts.index', compact('posts'));
     }
-    public function show()
+    public function show(Post $post) // route model binding
     {
-        return view('posts.show');
+        return view('posts.show', compact('post'));
     }
     public function create() 
     {

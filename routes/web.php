@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PostsController@index');
+
+Route::get('/posts/{post}', 'PostsController@show');
+
+ 
+// Associated Eloquent Model => Post
+// *we create the first with -m and -c flags (-mc)
+// And I' ll need a controller => PostsController 
+// A migration => creats_posts_table

@@ -12,18 +12,25 @@
       
       <div class="form-group">
         <label for="Title"> Title: </label>
-        <input type="text" class="form-control" id="exampleInputEmail1" name = "title"> 
+        <input type="text" class="form-control" id="exampleInputEmail1" name = "title" > 
         <!-- name = ... is used for submitting -->
       </div>
 
       <div class="form-group">
         <label for="Body">Body</label>
-        <textarea id = "body" name="body" class = "form-control"> </textarea>
+        <textarea id = "body" name="body" class = "form-control" > </textarea> 
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Publish</button>
       </div>
       
-      <button type="submit" class="btn btn-primary">Publish</button>
+      @include ('layouts.errors')
 
     </form>
+
+    
+
 
   </div>
 

@@ -23,6 +23,32 @@
           </li>
         @endforeach
       </ul>
+
+      {{-- Add a comment --}}
+
+      <hr>
+
+      <div class="card">
+        <div class="card-block">
+          <form method = "POST" action = "/posts/{{ $post->id }}/comments"> <!-- attention with the / forward slash to get to the root -->
+            <!-- {{ method_field('PATCH') }} used for some browsers -->
+            
+            {{ csrf_field() }}
+
+            <div class="form-group">
+              <textarea name = "body" placeholder = "Your comment here" class = "form-control">
+              </textarea>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary"> Add comment </button>
+            </div>
+          </form>
+
+          @include ('layouts.errors')
+
+        </div>
+      </div>
     </div>
   </div>
 @endsection

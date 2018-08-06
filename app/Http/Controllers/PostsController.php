@@ -25,10 +25,10 @@ class PostsController extends Controller
     }
     public function store() 
     {
-       $this->validate(request(), [
-        'title' => 'required',
-        'body' => 'required'
-       ]);
+    //    $this->validate(request(), [
+    //     'title' => 'required',
+    //     'body' => 'required'
+    //    ]); // error : no function such as validate()
    
         Post::create(request(['title', 'body'])); 
         

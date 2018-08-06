@@ -19,7 +19,7 @@ class PostsController extends Controller
     {
         return view('posts.show', compact('post'));
     }
-    public function create() 
+    public function create()
     {
         return view('posts.create');
     }

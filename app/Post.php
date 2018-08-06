@@ -6,7 +6,8 @@ namespace App;
 
 class Post extends Model
 {
-    //protected $fillable = ['title', 'name'];
-    protected $guarded = [];
-    // used for mass assignment, and for safety
+    public function comments()
+    {
+        return $this->hasMany(Comment::class); // equivalent to ('App\Comment')
+    }
 }

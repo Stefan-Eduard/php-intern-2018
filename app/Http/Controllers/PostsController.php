@@ -9,6 +9,11 @@ use App\Post;
 
 class PostsController extends Controller
 {
+    public function __construct() 
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {   // it's a controller action
         $posts = Post::latest()->get(); // latest is a query
@@ -29,8 +34,17 @@ class PostsController extends Controller
     //     'title' => 'required',
     //     'body' => 'required'
     //    ]); // error : no function such as validate()
-   
-        Post::create(request(['title', 'body'])); 
+        
+        // what we could do:
+        auth()->user()->publish(
+            new Post(request(['title', 'body']))
+        );
+
+        // Post::create([
+        //     'title' => request('title'),
+        //     'body' => request('body'),
+        //     'user_id' => auth()->id()
+        // ]); 
         
         return redirect('/'); 
     }

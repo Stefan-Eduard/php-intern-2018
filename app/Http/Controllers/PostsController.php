@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 // added
 use App\Post;
+use Carbon\Carbon; // ***
 
 class PostsController extends Controller
 {
@@ -16,9 +17,33 @@ class PostsController extends Controller
 
     public function index()
     {   // it's a controller action
-        $posts = Post::latest()->get(); // latest is a query
+        
+        $posts = Post::latest()
+            ->filter(request(['month', 'year']))
+            ->get();
+        // instead of:
+        // $posts = Post::latest(); 
 
-        return view('posts.index', compact('posts'));
+        // if($month = request('month'))
+        // {
+        //     $posts->whereMonth('created_at', Carbon::parse($month)->month);
+        // }
+
+        // if($year = request('year'))
+        // {
+        //     $posts->whereYear('created_at', $year);
+        // }
+
+        // $posts = $posts->get();
+        
+        // $archives = 
+        //     App\Post::selectRaw('year("created_at") year, month("created_at") month, count(*) published')
+        //     ->groupBy('year', 'month')
+        //     ->orderByRaw('min("created_at") desc')
+        //     ->get()
+        //     ->toArray();
+
+        return view('posts.index', compact('posts', 'archives'));
     }
     public function show(Post $post) // route model binding
     {
@@ -30,10 +55,10 @@ class PostsController extends Controller
     }
     public function store() 
     {
-    //    $this->validate(request(), [
-    //     'title' => 'required',
-    //     'body' => 'required'
-    //    ]); // error : no function such as validate()
+        //    $this->validate(request(), [
+        //     'title' => 'required',
+        //     'body' => 'required'
+        //    ]); // error : no function such as validate()
         
         // what we could do:
         auth()->user()->publish(

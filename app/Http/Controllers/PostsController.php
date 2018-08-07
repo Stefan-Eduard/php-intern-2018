@@ -18,9 +18,11 @@ class PostsController extends Controller
     public function index()
     {   // it's a controller action
         
-        $posts = Post::latest()
-            ->filter(request(['month', 'year']))
-            ->get();
+        // $archives = Post::archives();
+
+        // $posts = Post::latest()
+        //     ->filter(request(['month', 'year']))
+        //     ->get();
         // instead of:
         // $posts = Post::latest(); 
 
